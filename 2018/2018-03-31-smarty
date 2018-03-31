@@ -1,0 +1,106 @@
+# smarty
+
+## smarty的思想
+> 把标签解析成php输出语句，即是模板文件到php文件的过程。
+
+## smarty之辩
+
+- smarty编译模板浪费时间
+- 在把变量重新赋值到对象的属性上，增大了开销
+- 多引入了Smarty这个类
+
+## Smarty之简单实现
+
+```php
+
+class miniSmarty {
+	public $template_dir = ''; //模板文件所在的目录
+	public $complete_dir = ''; //编译后文件所在目录
+
+	// 定义一个数组，用来接收外部的变量
+	public $_tpl_var = array();
+
+	public function compile($template){
+		$tempFile_dir = $this->$template_dir . '/' . $template;
+		// 读取模板文件内容
+		$source = file_get_contents($tempFile_dir);
+
+		// 替换模板内容
+		$source = str_replace('{',<?php echo ',$source);
+		$source = str_replace('}',';?>',$source);
+
+		// 再把编译后的文件保存成php文件
+		$compFile = $this->$complete_dir . '/' . $template . '.php';
+		file_put_contents($compFile,$source);
+
+		return $compFile;
+	}
+
+	public fucntion assign($key,$value){
+		$this->_tpl_var[$key] = $value;
+	}
+
+	public function display($template){
+		$compileFile = $this->compile($template);
+		include($compileFile);
+	}
+}
+
+```
+
+## smarty的工作流程
+
+1. 把需要显示的全局变量，塞到对象内部的属性上，一个数组里
+2. 编译模板即把{$标签}解析成相应的php代码
+3. 引入编译后的php文件
+
+## 使用Smarty的步骤
+
+1. Smarty是一个类，先引入并实例化
+2. 配置：模板目录和编译目录...
+3. assign赋值
+4. 调用display方法，并把模板文件当参数传入进去
+
+```php
+①引入smarty
+require('../smarty3/smaty.class.php');
+②实例化
+$smarty = new Smarty();
+③配置
+$smarty->template_dir('../template');
+$smarty->complete_dir('../complete');
+④赋值
+$smarty->assign('language','php');
+$smarty->assign('frame','smarty3');
+⑤编译模板并引入
+$smarty->display('technology.html');
+
+```
+
+> 待编译模板文件technology.html
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{$frame}</title>
+</head>
+<body>
+	{$language}
+</body>
+</html>
+```
+
+> 编译后的文件technology.php
+
+```php
+<!DOCTYPE html>
+<html>
+<head>
+	<title><?php echo $frame; ?></title>
+</head>
+<body>
+	<?php echo $language; ?>
+</body>
+</html>
+```
