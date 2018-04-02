@@ -171,3 +171,5 @@ $smarty->display('demo.html');
 </body>
 </html>
 ```
+
+* 参考燕十八老师的smarty视频教程，其官网地址是[布尔教育](http://www.itbool.com)
