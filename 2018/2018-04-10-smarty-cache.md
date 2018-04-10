@@ -211,7 +211,7 @@ $smarty->display('goods.html',$goods_id);
                 比如：page=3&cat=4 , 第四栏目的第三页，
                 page和cat都要影响结果，因此这2个参数都要传入
             经典案例：
-                ecshop商城
+                ecshop商城，根据“缓存id”计算出真正的“缓存id”
     {/literal}
 
 	<table>
@@ -222,10 +222,32 @@ $smarty->display('goods.html',$goods_id);
 </html>
 ```
 
+## smarty缓存强制删除
 
+```php
+$goods_id = $_GET['goods_id'] + 0;
+$smarty = new MySmarty();
 
+// 2个参数
+// 第一个参数：模板名
+// 第二个参数：缓存id
+// 如果只指定模板名，不指定缓存id，则该模板对应得所有缓存都被删除
+$smarty->clearCache('goods.html');
 
+// 删除指定的缓存文件
+$smarty->clearCache('goods.html',$goods_id);
 
+echo "删除".$goods_id."号商品缓存成功";
+
+```
+
+## 强制更新缓存
+
+```php
+$smarty = new MySmarty();
+// 在php文件中，有时为了调试方便，临时不缓存，但又不想修改主代码，则可以加一个选项
+$smarty->force_cache = true;
+```
 
 
 * 参考燕十八老师的smarty视频教程，其官网地址是[布尔教育](http://www.itbool.com)
