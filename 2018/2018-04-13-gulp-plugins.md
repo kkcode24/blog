@@ -241,31 +241,149 @@ gulp.task('default', function () {
 });
 ```
 
-## 自动刷新
+## css自动添加前缀
 
-> gulp-livereload插件,当代码变化时，它可以帮我们自动刷新页面。<br>
-该插件最好配合谷歌浏览器来使用，且要安装livereload chrome extension扩展插件,不能下载的请自行FQ。
+> `gulp-autoprefixer`插件,自动can i use 检测css，然后自动添加前缀 
 
 - 安装:
-    + `npm install --save-dev gulp-livereload`
+    + `npm install --save-dev gulp-autoprefixer`
 
 ```javascript
 
-var gulp = require('gulp'),
-less = require('gulp-less'),
-livereload = require('gulp-livereload');
+const gulp = require('gulp');
+const autoprefixer = require('gulp-autoprefixer');
 
-gulp.task('less', function() {
+gulp.task('default', () =>
+	gulp.src('src/app.css')
+		.pipe(autoprefixer({
+			browsers: ['last 2 versions'],
+			cascade: false
+		}))
+		.pipe(gulp.dest('dist'))
+);
 
-    gulp.src('less/*.less')
-        .pipe(less())
-        .pipe(gulp.dest('css'))
-        .pipe(livereload());
-
-});
-
-gulp.task('watch', function() {
-    livereload.listen(); //要在这里调用listen()方法
-    gulp.watch('less/*.less', ['less']);
-});
 ```
+
+## 文件名修改成hash值
+
+> `gulp-rev`插件,文件名自动加hash值，来达到清除缓存的目的。
+
+- 安装:
+    + `npm install gulp-rev --save-dev`
+
+```javascript
+
+const gulp = require('gulp');
+var rev = require('gulp-rev');
+
+gulp.task('rev',function(){
+    gulp.src(['./dist/**/*.css','./dist/**/*.js','./dist/**/*'],{base:'./'})
+        /* 转换成新的文件名 */
+        .pipe(rev())
+        .pipe(gulp.dest('./dist'))
+        /*收集原文件名与新文件名的关系*/
+        .pipe(rev.manifest())
+        // 将文件以json的形式存在当前项目下的 ./rev 目录下
+        .pipe(gulp.dest('./rev'));
+});
+
+```
+## 替换文件路径插件
+
+> `gulp-rev-collector`插件
+
+- 安装:
+    + `npm install gulp-rev-collector --save-dev`
+
+```javascript
+
+const gulp = require('gulp');
+var revCollector = require('gulp-rev-collector');
+
+/* 使用这个模块，需要依赖rev任务，所以需要注入rev任务，如果不注入需要先执行rev任务 */
+gulp.task('revCollector',['rev'],function(){
+// 根据生成的json文件，去替换html里的路径
+gulp.src(['./rev/*.json','./dist/*.html'])
+       .pipe(revCollector())
+       .pipe(gulp.dest('./dest'));
+})
+
+```
+
+## 优化gulp命令
+> 从上面看到，我们每每去执行一条任务，就要运行一条命令，这样显然是不合理的，所以我们需要进行优化。<br>
+优化的方式就是任务注入以及 return 的使用 
+
+```javascript
+var gulp = require('gulp');
+var autoprefixer = require('gulp-autoprefixer');
+var concat = require('gulp-concat');
+var imagemin = require('gulp-imagemin');
+var htmlmin = require('gulp-htmlmin');
+var rev = require('gulp-rev');
+var revCollector = require('gulp-rev-collector');
+var uglify = require('gulp-uglify');
+
+// 处理CSS
+gulp.task('css', function () {
+    return gulp.src('./css/*.css', {base: './'})
+               .pipe(autoprefixer())
+               .pipe(gulp.dest('./dist'));
+});
+
+// 此处就不做CSS压缩的演示了，原理相同。
+
+// 压缩js
+gulp.task('js', function() {
+    return gulp.src('./js/*.js', {base: './'})
+               .pipe(uglify())
+               .pipe(gulp.dest('./dist'));
+});
+
+// 压缩图片
+gulp.task('image', function () {
+    return gulp.src('./images/*', {base: './'})
+               .pipe(imagemin())
+               .pipe(gulp.dest('./dist'));
+});
+
+// 压缩html
+gulp.task('html', function () {
+    return gulp.src('./*.html')
+               .pipe(htmlmin({
+                   removeComments: true,
+                   collapseWhitespace: true,
+                   minifyJS: true
+               }))
+               .pipe(gulp.dest('./dist'));
+});
+
+// 生成hash文件名
+gulp.task('rev',['css', 'js', 'image', 'html'], function () {
+    // 其中加!前缀的是表示过滤该文件
+    return gulp.src(['./dist/**/*', '!**/*.html'], {base: './dist'})
+               .pipe(rev())
+               .pipe(gulp.dest('./dist'))
+               .pipe(rev.manifest())
+               .pipe(gulp.dest('./rev'));
+});
+
+// 替换文件路径
+gulp.task('revCollector',['rev'], function () {
+    // 根据生成的json文件，去替换html里的路径
+    return gulp.src(['./rev/*.json', './dist/*.html'])
+               .pipe(revCollector())
+               .pipe(gulp.dest('./dist'));
+});
+
+// gulp中默认以default为任务名称
+gulp.task('default', ['revCollector']);
+```
+
+**执行任务,在命令行中，我们只需要执行下面的命令**
+```shell
+$ gulp
+或者是 
+$ gulp default 
+```
+
