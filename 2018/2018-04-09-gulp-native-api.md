@@ -19,6 +19,8 @@ gulp的各个插件需要知道自己处理的是那些位置的文件，而golb
 
 [node-glob语法](https://github.com/isaacs/node-glob#glob-primer);
 
+![glob-table-parttern](https://github.com/kkcode24/blog/blob/master/2018/images/2018-04-13-glob.png)
+
 **匹配文件中0个或者多个字符，但是不会匹配路径中的分隔符，除非路径分隔符出现在末尾**
 
 ```javascript
