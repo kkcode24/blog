@@ -308,8 +308,5 @@ event.path 类型: String 触发该事件的文件路径
 **转载**
 * 原文地址-[gulp排除文件(文件路径匹配模式globs)](http://www.siyuweb.com/gulp/3207.html)
 
-<br />
-**参考**
-
 
 
