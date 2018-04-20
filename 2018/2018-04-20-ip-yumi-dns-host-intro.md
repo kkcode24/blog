@@ -101,4 +101,4 @@ HOSTS文件相当于一个本地的小型DNS服务器，电脑会优先在本地
 * 转载
 - [网址（url），域名，ip地址，dns，hosts之间的关系](https://www.cnblogs.com/fangzuchang/p/6702023.html)
 
-![ip-yumi-dns-host关系图]()
+![ip-yumi-dns-host关系图](https://github.com/kkcode24/blog/blob/master/2018/images/ip-dns-server.png)
