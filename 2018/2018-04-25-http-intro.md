@@ -23,7 +23,7 @@ http协议即按一定规则向服务器要数据或发送数据，而服务器�
 - tcp/ip
 
 ## 当你打开一个页面时，发生了什么？
-![一个请求过程，握手协议]('./images/http.png')
+![一个请求过程，握手协议]('https://github.com/kkcode24/blog/blob/master/2018/images/http.png')
 
 ## 浏览器发送一次http请求
 ![浏览器http请求]('./images/http-request-reponse.png')
