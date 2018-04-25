@@ -23,10 +23,10 @@ http协议即按一定规则向服务器要数据或发送数据，而服务器�
 - tcp/ip
 
 ## 当你打开一个页面时，发生了什么？
-![一个请求过程，握手协议]('https://github.com/kkcode24/blog/blob/master/2018/images/http.png')
+![](./images/http.png)
 
 ## 浏览器发送一次http请求
-![浏览器http请求]('./images/http-request-reponse.png')
+![](./images/http-request-reponse.png)
 
 ## http协议的工作流程
 1. 发送请求
@@ -54,7 +54,7 @@ http协议即按一定规则向服务器要数据或发送数据，而服务器�
 	+ OPTIONS
 
 ## 使用telnet发送一次http请求
-![telnet-http请求]('./images/telnet-request.png')
+![](./images/telnet-request.png)
 
 
 **浏览器可以发送http协议，那协议一定要浏览器发送吗？**
