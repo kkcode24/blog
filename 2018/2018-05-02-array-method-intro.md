@@ -426,8 +426,7 @@ toString 方法是所有内建的`JS`对象的成员。它的操作依赖于对�
 | Boolean     |   如果 Boolean 值是 true，则返回 “true”。否则，返回 “false”。 | 
 | Date      |     返回日期的文字表示法。 | 
 | Error      |    返回一个包含相关错误消息的字符串。 | 
-| Function      |     返回如下格式的字符串，其中 functionname 是被调用 toString 方法函数的名称： 
-function functionname( ) { [native code] } | 
+| Function      |     返回如下格式的字符串，其中 functionname 是被调用 toString 方法函数的名称： function functionname( ) { [native code] }| 
 | Number      |    返回数字的文字表示。 | 
 | String      |    返回 String 对象的值。 | 
 | 默认      |   返回 “[object objectname]”，其中 objectname 是对象类型的名称。 | 
