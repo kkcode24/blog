@@ -1,4 +1,4 @@
-# ip-域名-dns-host介绍
+# ip-domainName-dns-host介绍
 
 ## 什么是ip？
 
