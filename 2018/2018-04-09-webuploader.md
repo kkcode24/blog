@@ -555,3 +555,14 @@ jQuery(function() {
 ```
 
 > 总结：在没有正式上传前，是可以对图片做删除处理的。图片真正上传后，在编辑时，需要把图片添加到队列中并设置状态为完成。
+
+
+
+**编辑回显可参考以下文章**
+
+- [2017-09-11-编辑图片，可以删除上次上传的图片，可以新加上传图片](https://www.cnblogs.com/chen-yun/p/7505376.html)
+- [2016年11月09日-webuploader-多图上传，修改信息时，如何回显这些图片](https://segmentfault.com/q/1010000007428390)
+- [2017-11-22-webuploader编辑时回显文件放入队列的做法](https://www.cnblogs.com/lizimeme/p/7880650.html)
+- [2016年10月13日编辑回显](https://blog.csdn.net/weixin_35890630/article/details/52805528#t5)
+
+
