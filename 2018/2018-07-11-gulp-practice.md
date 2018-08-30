@@ -302,7 +302,7 @@ gulp.task('styles',function(){
 
 ## test2配置
 
-```
+```javascript
 
 var gulp = require('gulp');
 var less = require('gulp-less');
