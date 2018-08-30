@@ -43,8 +43,11 @@ meta标签都有哪些属性？
 | 属性 | 值 |描述|
 |--|--|--|
 | http-equiv |content-type，expires，refresh，set-cookie  |把 content 属性关联到 HTTP 头部。|
-| name | -   author, description, keywords, generator,revised,others | |
+| name | -   author, description, keywords, generator,revised,others | 把content属性关联到一个名称。 |
+| scheme | some_text | 定义用于翻译 content 属性值的格式。 |
+
+O
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkwMzM2MTIxM119
+eyJoaXN0b3J5IjpbLTUzOTI1NTg5OV19
 -->
