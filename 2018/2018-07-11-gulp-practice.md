@@ -299,3 +299,78 @@ gulp.task('styles',function(){
 });
 ```
 
+
+## test2配置
+
+```
+
+var gulp = require('gulp');
+var less = require('gulp-less');
+var plugins = require('gulp-load-plugins')();
+var pngquant = require('imagemin-pngquant');
+
+
+gulp.task('default', function(){
+    gulp.src('less/zhanzhao.less').pipe(less()).pipe(gulp.dest('css/'));
+    gulp.src('less/liuqian.less').pipe(less()).pipe(gulp.dest('css/'));
+    gulp.src('less/student.less').pipe(less()).pipe(gulp.dest('css/'));
+    return gulp.src('less/company.less').pipe(less()).pipe(gulp.dest('css/'));
+});
+
+gulp.task('clean',function(){
+    return gulp.src('publish/').pipe(plugins.clean());
+});
+
+
+gulp.task('bulid', ['clean'],function(){
+  gulp.src('favicon.ico').pipe(gulp.dest('publish/'));
+    gulp.src('download/**/*').pipe(gulp.dest('publish/download/'));
+    gulp.src('mail/**/*').pipe(gulp.dest('publish/mail/'));
+    gulp.src('statement/**/*').pipe(gulp.dest('publish/statement/'));
+    gulp.src('template/**/*').pipe(gulp.dest('publish/template/'));
+  gulp.src('css/**/*.css').pipe(plugins.minifyCss()).pipe(gulp.dest('publish/css/'));
+    gulp.src('scripts/**/*.js').pipe(plugins.uglify()).pipe(gulp.dest('publish/scripts/'));
+  return gulp.src('images/**/*').pipe(plugins.cache(plugins.imagemin({
+            optimizationLevel: 5,
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()]
+        }))).pipe(gulp.dest('publish/images/'));
+});
+
+gulp.task("revision",['bulid'],function(){
+  gulp.src(['template/head-js.html', 'template/baidu.html']).pipe(plugins.concat('head-js.html')).pipe(gulp.dest('publish/template/'));
+
+  return gulp.src(['publish/css/*.css','publish/scripts/config.js','publish/images/**/*'],{base: 'publish'})
+        .pipe(plugins.rev())
+        .pipe(gulp.dest('publish/'))
+        .pipe(plugins.rev.manifest({
+          merge: true
+        }))
+        .pipe(gulp.dest('publish/'));
+});
+
+
+gulp.task("publish", ["revision"],function(){
+  var manifestCss = gulp.src("publish/rev-manifest.json"),
+      manifestDownload = gulp.src("publish/rev-manifest.json"),
+      manifest = gulp.src("publish/rev-manifest.json");
+
+  gulp.src('publish/css/*.css')
+    .pipe(plugins.revReplace({manifest: manifest}))
+    .pipe(gulp.dest('publish/css/'));
+ 
+  gulp.src('*.html')
+    .pipe(plugins.revReplace({manifest: manifestCss}))
+    .pipe(gulp.dest('publish/'));
+
+  gulp.src('publish/download/*.html')
+    .pipe(plugins.revReplace({manifest: manifestDownload}))
+    .pipe(gulp.dest('publish/download/'));
+});
+
+```
+
+[三只松鼠干货源码](https://segmentfault.com/a/1190000006157372#articleHeader3)
+
+
