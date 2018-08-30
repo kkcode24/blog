@@ -38,6 +38,12 @@ HTML文档是由多个元素组成。
 meta标签都有哪些属性？  
   
 必须的属性`content`,属性值是`some_text`,其意义是定义与http-equiv或name属性相关的元信息。
+
+
+| 属性 | 值 |描述|
+|--|--|--|
+|  |  |
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEzNDM5MDIyMF19
+eyJoaXN0b3J5IjpbLTQzNjc0NDI1MF19
 -->
