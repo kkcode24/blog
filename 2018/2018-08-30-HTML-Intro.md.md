@@ -42,8 +42,8 @@ meta标签都有哪些属性？
 
 | 属性 | 值 |描述|
 |--|--|--|
-|  |  |
+| http-equiv |content-type，expires，refresh，set-cookie  |把 content 属性关联到 HTTP 头部。|
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQzNjc0NDI1MF19
+eyJoaXN0b3J5IjpbMTc1MzQxMzI5MF19
 -->
