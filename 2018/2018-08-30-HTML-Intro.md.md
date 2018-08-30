@@ -46,8 +46,8 @@ meta标签都有哪些属性？
 | name | -   author, description, keywords, generator,revised,others | 把content属性关联到一个名称。 |
 | scheme | some_text | 定义用于翻译 content 属性值的格式。 |
 
-O
+
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUzOTI1NTg5OV19
+eyJoaXN0b3J5IjpbODc3Nzc0NDkyXX0=
 -->
