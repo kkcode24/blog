@@ -46,3 +46,84 @@
   
 })();
 ```
+
+我们把调用方法带入进去看看其到底是怎么实现的。
+
+```javascript
+
+var Person = Class.extend({
+  init: function(isDancing){
+    this.dancing = isDancing;
+  },
+  dance: function(){
+    return this.dancing;
+  }
+});
+
+因此
+prop = {
+  init: function(isDancing){
+    this.dancing = isDancing;
+  },
+  dance: function(){
+    return this.dancing;
+  }
+}
+
+var _super = 超级父类的原型对象
+var prototype = 由超级父类生成的实例
+initializing = false;
+
+for循环
+
+第一次循环
+
+ typeof prop["init"] == "function" // true
+ typeof _super["init"] == "function" // false
+ typeof fnTest.test(function(isDancing){this.dancing = isDancing;}) // false
+
+
+循环结束后，所以
+
+ prototype["init"] = prop["init"];
+ prototype["dance"] = prop["dance"]
+
+子类：
+
+ function Class(){
+	if(!initializing && this.init){
+	    this.init.apply(this, arguments);
+	}
+ }
+
+ // 赋值原型链，完成继承
+ Class.prototype = prototype;
+
+ // 改变constructor的指向
+ Class.prototype.constructor = Class;
+
+ // 为子类Class添加extend方法
+ Class.extend = arguments.callee;
+
+ // 返回子类
+ return Class;
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
