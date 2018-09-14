@@ -139,8 +139,81 @@ initializing = false;
 
  此时调用p.dance();则其输出为true
 
+```
+
+**此时，Person类指向子类Class**
+
+```
+function Class(){
+	if(!initializing && this.init){
+		this.init.apply(this, arguments);
+	}
+} 
+
+Class.prototype = {
+	constructor: 指向自身的构造函数Class
+	init: function(isDancing){this.dancing = isDancing},
+	dance: function(){ return this.dancing;}
+}
+
+Class.extend方法与超级父类相同
+```
+
+**当基于Person进行继承时**
+
+```javascript
+var qdgithub = Person.extend({
+  init: function(){
+    this._super( false );
+  },
+  dance: function(){
+    // Call the inherited version of dance()
+    return this._super();
+  },
+  swingSword: function(){
+    return true;
+  }
+});
  
 
+ 因此
+
+ var _super = Person的原型对象
+ var prototype = Person类生成的实例
+ initializing = false;
+
+** 第一次for循环：**
+
+ typeof prop["init"] == "function"   // true
+ typeof _super["init"] == "function"  // true
+ fnTest.test(function(){this._super}) // true
+
+ 因此进入闭包，把Person类的对象属性方法混入子类上。
+
+ 参数： 
+ name: "init"
+ fn: function(){this._super}
+
+ 返回匿名函数
+ prototype["init"] = function(){
+	var tmp = this._super;
+        this._super = function(isDancing){this.dancing = isDancing;};
+        var ret = fn.apply(this, arguments);
+        this._super = tmp;
+        return ret;
+ }
+
+ 第二次循环同第一次循环
+ prototype["dance"] = function(){
+	var tmp = this._super;
+        this._super = function(){ return this.dancing;}
+        var ret = fn.apply(this, arguments);
+        this._super = tmp;
+        return ret;
+ }
+
+ 第三次循环
+ prototype["swingSword"] = function(){return true;}
 ```
 
 
