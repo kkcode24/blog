@@ -162,7 +162,7 @@ Class.extend方法与超级父类相同
 **当基于Person进行继承时**
 
 ```javascript
-var qdgithub = Person.extend({
+var QdGithub = Person.extend({
   init: function(){
     this._super( false );
   },
