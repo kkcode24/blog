@@ -186,18 +186,19 @@ var qdgithub = Person.extend({
 
  typeof prop["init"] == "function"   // true
  typeof _super["init"] == "function"  // true
- fnTest.test(function(){this._super}) // true
+ fnTest.test(function(){this._super(false)}) // true
 
  因此进入闭包，把Person类的对象属性方法混入子类上。
 
  参数： 
  name: "init"
- fn: function(){this._super}
+ fn: function(){this._super(false)}
 
  返回匿名函数
  prototype["init"] = function(){
 	var tmp = this._super;
         this._super = function(isDancing){this.dancing = isDancing;};
+	fn = function(){this._super(false)};
         var ret = fn.apply(this, arguments);
         this._super = tmp;
         return ret;
@@ -207,6 +208,7 @@ var qdgithub = Person.extend({
  prototype["dance"] = function(){
 	var tmp = this._super;
         this._super = function(){ return this.dancing;}
+	fn = function(){return this._super();}
         var ret = fn.apply(this, arguments);
         this._super = tmp;
         return ret;
@@ -214,6 +216,59 @@ var qdgithub = Person.extend({
 
  第三次循环
  prototype["swingSword"] = function(){return true;}
+
+
+返回子类
+function Class(){
+	if(!initializing && this.init){
+		this.init.apply(this, arguments);
+	}
+} 
+
+Class.prototype = {
+	constructor: 指向自身的构造函数Class
+	init: function(){
+		var tmp = this._super;
+        	this._super = function(isDancing){this.dancing = isDancing;};
+		fn = function(){this._super(false)};
+        	var ret = fn.apply(this, arguments);
+        	this._super = tmp;
+        	return ret;
+	},
+	dance: function(){
+		var tmp = this._super;
+        	this._super = function(){ return this.dancing;}
+		fn = function(){return this._super();}
+        	var ret = fn.apply(this, arguments);
+        	this._super = tmp;
+        	return ret;
+	},
+	swingSword: function(){return true;}
+}
+
+Class.extend方法与超级父类相同
+
+
+因此:QdGithub = 返回的子类Class（就是上面刚刚分析，返回的子类Class）
+
+ 调用，使用QdGithub构造函数，创建一个实例。
+
+ var n = new QdGithub(true);
+ 当new QdGithub()时，实际上调用的是 返回的子类Class
+ 此时this指向刚刚创建生成的实例n,
+ 因此if条件为真，执行 this.init.apply(this,arguments),把实例n的dancing属性设置为false
+
+ init: function(){
+	var tmp = this._super;
+        this._super = function(isDancing){this.dancing = isDancing;};
+	fn = function(){this._super(false)};
+        var ret = fn.apply(this, arguments);
+        this._super = tmp;
+        return ret;
+ } 
+
+ 此时调用n.dance();则其输出为false
+ 
 ```
 
 
