@@ -268,23 +268,11 @@ Class.extend方法与超级父类相同
  } 
 
  此时调用n.dance();则其输出为false
+ 此时调用n.swingSword();则其输出为true
+ 
+// Should all be true
+p instanceof Person && p instanceof Class &&
+n instanceof Ninja && n instanceof Person && n instanceof Class
  
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+**【一起探讨，微信公众号：qdgithub】**
