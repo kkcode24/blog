@@ -74,16 +74,14 @@ var _super = 超级父类的原型对象
 var prototype = 由超级父类生成的实例
 initializing = false;
 
-for循环
-
-第一次循环
+**第一次for循环**
 
  typeof prop["init"] == "function" // true
  typeof _super["init"] == "function" // false
  typeof fnTest.test(function(isDancing){this.dancing = isDancing;}) // false
 
 
-循环结束后，所以
+**循环结束后，所以**
 
  prototype["init"] = prop["init"];
  prototype["dance"] = prop["dance"]
@@ -107,6 +105,27 @@ for循环
 
  // 返回子类
  return Class;
+
+
+ 因此,Person = 返回的子类Class;
+ 而子类Class
+	function Class(){
+	    if(!initializing && this.init){
+		this.init.apply(this, arguments);
+	    }
+	} 
+
+	Class.prototype = {
+	    constructor: 指向自身的构造函数Class
+	    init: function(isDancing){this.dancing = isDancing},
+	    dance: function(){ return this.dancing;}
+	}
+
+	Class.extend方法与超级父类相同
+
+
+
+ 
 
 ```
 
