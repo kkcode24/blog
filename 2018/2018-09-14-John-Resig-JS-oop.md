@@ -107,8 +107,12 @@ initializing = false;
  return Class;
 
 
- 因此,Person = 返回的子类Class;
+ 因此
+	
+	Person = 返回的子类Class;
+
  而子类Class
+ 此时的this指向超级父类Class
 	function Class(){
 	    if(!initializing && this.init){
 		this.init.apply(this, arguments);
@@ -124,6 +128,16 @@ initializing = false;
 	Class.extend方法与超级父类相同
 
 
+调用，使用Person构造函数，创建一个实例。
+
+ var p = new Person(true);
+ 当new Person()时，实际上调用的是 返回的子类Class
+ 此时this指向刚刚创建生成的实例p,
+ 因此if条件为真，执行 this.init.apply(this,arguments)
+
+ init: function(true){this.dancing = true;}
+
+ 此时调用p.dance();则其输出为true
 
  
 
