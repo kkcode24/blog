@@ -508,3 +508,29 @@ function CreateRadixTable() {
 | Number  |  数字值。 |
 | Object  |  对象本身。这是默认情况。 |
 | String  |  字符串值。 |
+
+## indexOf,lastIndexOf
+> 这两个函数都有两个参数
+
+- arg1: 表示要查找的项
+- arg2: 可选，表示查找的起始位置的索引
+
+兼容：IE9+，Firefox2+，Safari3+，Opera9.5+，Chrome
+
+## 迭代方法
+> 以下函数的兼容：IE9+，Firefox2+，Safari3+，Opera9.5+，Chrome
+
+### every
+> 对数组的每一项运行给定函数，如果该函数对每一项都返回true，则返回true
+
+### filter
+> 对数组的每一项运行给定函数，返回该函数返回true的项组成的数组。
+
+### forEach
+> 对数组的每一项运行给定函数，没有返回值
+
+### map
+> 对数组的每一项运行给定函数，返回每次函数调用的结果组成的数组。
+
+### some
+> 对数组的每一项运行给定函数，如果该函数对任一项返回true，则返回true
