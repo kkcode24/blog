@@ -1,9 +1,10 @@
-## gulp的介绍
-用自动化构建工具增强你的工作流程！
-
+## gulp的一些有用链接
 + [gulp官网](http://gulpjs.com/)
 + [gulp中文网](http://www.gulpjs.com.cn/)
 + [gulp-native-api(包含node-glob语法介绍)](https://github.com/kkcode24/blog/blob/master/2018/2018-04-09-gulp-native-api.md)
++ [一些常用的gulp插件](https://github.com/kkcode24/blog/edit/master/2018/2018-04-13-gulp-plugins.md)
++ [gulp插件网](https://gulpjs.com/plugins/)
++ [gulp源码解析](http://www.cnblogs.com/vajoy/p/6349817.html)
 
 ## gulp的安装
 1. 全局安装gulp
