@@ -1,62 +1,33 @@
-# 自动化工具gulp
-
-## 当下的前端开发
-
-- 不再是简单的使用HTML+CSS+js 这些技术构建网页应用
-- 我们要提高效率，就必须减少重复的工作
-- 使用less之类预处理的css coffeescript
-- 提供开发阶段的便利，开发阶段更快捷
-- 现在的开发行业优质的开发人员是不应该将精力放在这些重复性的工作上
-- gulp就是一种可以自动化完成我们开发过程中大量的重复工作
-	+ 预处理语言的编译
-	+ js css html 压缩混淆
-	+ 图片体积优化
-- 除gulp之外还有类似的自动化工具
-	+ grunt
-	+ webpack
-
-
 ## gulp的介绍
 用自动化构建工具增强你的工作流程！
-- 当下最流行的的自动化工具
-	+ 什么是自动化工具？
-	+ 自动完成一系列重复的操作
-- 链接：
-	+ [官网](http://gulpjs.com/);
-	+ [中文网](http://www.gulpjs.com.cn/);
-### 易于使用
-> 通过代码优于配置的策略，Gulp 让简单的任务简单，复杂的任务可管理。
-### 构建快速
-> 利用 Node.js 流的威力，你可以快速构建项目并减少频繁的 IO(input,output) 操作
-### 插件高质
-> Gulp 严格的插件指南确保插件如你期望的那样简洁高质得工作
 
-### 易于学习
-通过最少的 API，掌握 Gulp 毫不费力，构建工作尽在掌握：如同一系列流管道。
-
++ [gulp官网](http://gulpjs.com/)
++ [gulp中文网](http://www.gulpjs.com.cn/)
++ [gulp-native-api(包含node-glob语法介绍)](https://github.com/kkcode24/blog/blob/master/2018/2018-04-09-gulp-native-api.md)
 
 ## gulp的安装
 1. 全局安装gulp
 ```
 npm install --global gulp
-// 换镜像
-npm config set registry https://registry.npm.taobao.org 
 ```
 2. 作为项目的开发依赖（devDependencies）安装
 ```
 npm install --save-dev gulp
 ```
 3. 在项目根目录下创建一个名为gulpfile.js的文件
-```
-var gulp = require('gulp');
 
-gulp.task('default',function(){
-	// 将你的默认的任务代码放在这
-});
+	```
+	var gulp = require('gulp');
+	
+	gulp.task('default',function(){
+		// 将你的默认的任务代码放在这
+	});
+	```
+
+4 . 运行gulp
+
 ```
-4. 运行gulp
-```
-gulp
+	gulp
 ```
 
 **注意**
