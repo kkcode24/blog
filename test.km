@@ -1,11 +1,1 @@
-{
-  "root": {
-    "data": {
-      "text": "中心主题"
-    },
-    "children": []
-  },
-  "template": "default",
-  "theme": "fresh-blue",
-  "version": "1.4.43"
-}
+{"root":{"data":{"text":"中心主题","contextChanged":true,"changed":true},"children":[{"data":{"id":"djhqf0r7exs0","created":1782350205539,"text":"nodejs","contextChanged":true,"changed":true},"children":[{"data":{"id":"djhqf30xjhs0","created":1782350210480,"text":"分支主题","contextChanged":true,"changed":true},"children":[]}]},{"data":{"id":"djhqf4h7neo0","created":1782350213641,"text":"哈哈","contextChanged":true,"changed":true},"children":[]}]},"template":"right","theme":"fresh-blue","version":"1.4.43"}
